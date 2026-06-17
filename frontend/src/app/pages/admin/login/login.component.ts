@@ -15,6 +15,10 @@ import { AuthService } from '../../../core/auth/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
@@ -22,12 +26,6 @@ export class LoginComponent {
 
   readonly loading = signal(false);
   readonly errorMessage = signal<string | null>(null);
-
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly router: Router,
-  ) {}
 
   submit(): void {
     if (this.form.invalid) {
