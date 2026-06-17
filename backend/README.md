@@ -26,6 +26,19 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## FireFighter Web — Auth setup
+
+This backend requires PostgreSQL and Redis (see root `docker-compose.yml`). Copy `.env.example`
+from the repo root to `backend/.env` and fill in real values, then run:
+
+```bash
+npx prisma migrate dev
+npx ts-node prisma/seed.ts   # seeds an initial ADMIN user (admin-invite only)
+```
+
+See [agents.md](../agents.md#1-auth-agent) for the full `auth-agent` spec and
+[CHANGELOG.md](CHANGELOG.md) for what's implemented so far.
+
 ## Installation
 
 ```bash
