@@ -91,10 +91,7 @@ export class ArticlesService {
     });
   }
 
-  async remove(id: string, requesterRole: string) {
-    if (requesterRole !== 'ADMIN') {
-      throw new ForbiddenException('Only ADMIN can delete articles');
-    }
+  async remove(id: string) {
     await this.findOneForAdmin(id);
     await this.prisma.article.delete({ where: { id } });
   }
