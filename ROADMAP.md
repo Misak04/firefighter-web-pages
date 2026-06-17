@@ -47,7 +47,7 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 - [ ] Monorepo setup (Nx or separate `frontend/` + `backend/` dirs)
 - [ ] Docker Compose: PostgreSQL, Redis, MinIO, Nginx stubs
 - [ ] NestJS project bootstrap with Prisma + PostgreSQL connection
-- [ ] Angular 18 project bootstrap with PrimeNG + routing skeleton
+- [ ] Angular 19 project bootstrap with PrimeNG + routing skeleton
 - [ ] Environment config pattern (`.env.example`, validation with `joi`)
 - [ ] Git repository + branch strategy (main/dev/feature)
 - [ ] Nginx config: reverse proxy + TLS placeholder
@@ -285,7 +285,7 @@ is clean and section-scoped. Admins can revert any content change without touchi
 
 | Layer | Choice | Reason |
 |---|---|---|
-| Frontend framework | Angular 18 (standalone) | Typed, scalable, SSR support |
+| Frontend framework | Angular 19 (standalone) | Typed, scalable, SSR support |
 | UI components | PrimeNG | Rich gallery, table, upload components |
 | Frontend state | Angular Signals | Lightweight, built-in, modern |
 | Backend framework | NestJS 10 | TypeScript, modular, decorator-based |
