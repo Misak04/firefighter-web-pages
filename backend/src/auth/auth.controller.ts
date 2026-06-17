@@ -27,6 +27,7 @@ export class AuthController {
     return { accessToken };
   }
 
+  @Public()
   @Post('refresh')
   @HttpCode(200)
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
