@@ -97,7 +97,13 @@ export class ArticlesService {
   }
 
   private sanitize(body: string): string {
-    return DOMPurify.sanitize(body);
+    return sanitizeHtml(body, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ['src', 'alt'],
+      },
+    });
   }
 
   private toTsQuery(q: string): string {
