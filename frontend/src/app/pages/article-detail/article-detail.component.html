@@ -1,1 +1,11 @@
-<p>article-detail works!</p>
+@if (article(); as a) {
+  <article class="article-detail">
+    <h1>{{ a.title }}</h1>
+    @if (a.publishedAt) {
+      <time [attr.datetime]="a.publishedAt">{{ a.publishedAt | date: 'mediumDate' }}</time>
+    }
+    <div class="article-body" [innerHTML]="a.body"></div>
+  </article>
+} @else if (notFound()) {
+  <p>Article not found.</p>
+}
