@@ -59,14 +59,14 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 1 — Authentication & RBAC (Week 3–4)
 > Goal: Secure login, roles, refresh tokens
 
-- [ ] User model in Prisma (id, email, passwordHash, role, createdAt, lastLogin)
-- [ ] `POST /auth/login` — bcrypt verify, issue JWT + refresh token
-- [ ] `POST /auth/refresh` — rotate refresh token
-- [ ] `POST /auth/logout` — invalidate refresh token in Redis
-- [ ] NestJS Guards: `JwtAuthGuard`, `RolesGuard`
-- [ ] Admin Angular module: login page, token interceptor, auto-logout on 401
-- [ ] Rate limiting on auth endpoints (5 req/min)
-- [ ] Audit log model + service (log every login/logout/failure)
+- [x] User model in Prisma (id, email, passwordHash, role, createdAt, lastLogin)
+- [x] `POST /auth/login` — bcrypt verify, issue JWT + refresh token
+- [x] `POST /auth/refresh` — rotate refresh token
+- [x] `POST /auth/logout` — invalidate refresh token in Redis
+- [x] NestJS Guards: `JwtAuthGuard`, `RolesGuard`
+- [x] Admin Angular module: login page, token interceptor, auto-logout on 401
+- [x] Rate limiting on auth endpoints (5 req/min)
+- [x] Audit log model + service (log every login/logout/failure)
 
 **Deliverable:** Admin can log in, receives JWT, is rejected if token expired or role insufficient.
 
