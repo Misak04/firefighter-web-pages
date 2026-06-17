@@ -44,13 +44,13 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 0 — Foundation (Week 1–2)
 > Goal: Repository structure, tooling, CI/CD skeleton, Docker environment running
 
-- [ ] Monorepo setup (Nx or separate `frontend/` + `backend/` dirs)
-- [ ] Docker Compose: PostgreSQL, Redis, MinIO, Nginx stubs
-- [ ] NestJS project bootstrap with Prisma + PostgreSQL connection
-- [ ] Angular 19 project bootstrap with PrimeNG + routing skeleton
-- [ ] Environment config pattern (`.env.example`, validation with `joi`)
-- [ ] Git repository + branch strategy (main/dev/feature)
-- [ ] Nginx config: reverse proxy + TLS placeholder
+- [x] Monorepo setup (Nx or separate `frontend/` + `backend/` dirs)
+- [x] Docker Compose: PostgreSQL, Redis, MinIO, Nginx stubs
+- [x] NestJS project bootstrap with Prisma + PostgreSQL connection
+- [x] Angular 19 project bootstrap with PrimeNG + routing skeleton
+- [x] Environment config pattern (`.env.example`, validation with `joi`)
+- [x] Git repository + branch strategy (main/dev/feature)
+- [x] Nginx config: reverse proxy + TLS placeholder
 
 **Deliverable:** `docker compose up` starts all services; Angular and NestJS hello-world reachable.
 
