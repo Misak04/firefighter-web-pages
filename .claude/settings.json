@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/skrebskymi/WebDevel/fireFighterWebPages && git add -A && git diff --cached --quiet || git commit -m \"auto: $(git diff --cached --name-only | head -5 | tr '\\n' ' ' | sed 's/ $//')\" --no-gpg-sign 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
