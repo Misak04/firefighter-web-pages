@@ -40,6 +40,7 @@ export class AuthController {
     return { accessToken: tokens.accessToken };
   }
 
+  @Public()
   @Post('logout')
   @HttpCode(200)
   async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
