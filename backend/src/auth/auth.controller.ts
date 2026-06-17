@@ -3,6 +3,7 @@ import { Throttle } from '@nestjs/throttler';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { Public } from './decorators/public.decorator';
 
 const REFRESH_COOKIE = 'refresh_token';
 const REFRESH_COOKIE_OPTIONS = {
