@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ArticlesService } from '../../core/articles/articles.service';
 import { Article } from '../../core/articles/article.model';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
 })
