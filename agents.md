@@ -192,6 +192,41 @@ access, invalid input) for every endpoint listed in the Role Matrix — not just
 
 ---
 
+## Pages & Routes
+
+### Public (`public-agent`, SSR)
+
+| Page | Route | Content / SEO Notes |
+|---|---|---|
+| Home | `/` | Latest articles, featured events; OG meta for sharing |
+| Articles list | `/articles` | Paginated, filterable by tag; search bar |
+| Article detail | `/articles/:slug` | SSR for SEO; OG meta per article (title, image, description) |
+| Gallery — years | `/gallery` | Year picker, thumbnail of featured event per year |
+| Gallery — events | `/gallery/:year` | Event picker within a year |
+| Gallery — photos | `/gallery/:year/:event` | Lightbox, lazy-loaded pagination |
+| Technics | `/technics` | Category tabs (`VEHICLE`, `PUMP`, etc.), equipment cards |
+| Technics detail | `/technics/:id` | Full specs, photos, status |
+| Search results | `/search?q=` | Combined articles + technics results |
+
+### Admin (`admin-agent`, SPA, JWT-guarded)
+
+| Page | Route | Content / Access Notes |
+|---|---|---|
+| Login | `/admin/login` | Public; rate-limited per `auth-agent` |
+| Dashboard | `/admin` | Overview/summary; EDITOR+ |
+| Article editor (list) | `/admin/articles` | EDITOR+ |
+| Article editor (edit/create) | `/admin/articles/:id` | Rich-text editor; EDITOR+ |
+| Gallery manager | `/admin/gallery` | Bulk upload, event/year tagging; EDITOR+ |
+| Technics manager | `/admin/technics` | CRUD; EDITOR+ |
+| Revision history | `/admin/:section/:id/revisions` | Diff + restore; EDITOR+ view, ADMIN restore |
+| User management | `/admin/users` | Create/assign roles/revoke; ADMIN only |
+| Audit log | `/admin/audit-log` | ADMIN only |
+
+**Note:** route access must match the [Role Matrix](#role-matrix) below — keep this table and
+the matrix in sync when adding new pages or changing permissions.
+
+---
+
 ## Agent Communication Map
 
 ```
