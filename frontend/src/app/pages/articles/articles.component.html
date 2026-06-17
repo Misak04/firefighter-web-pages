@@ -1,1 +1,24 @@
-<p>articles works!</p>
+<section class="articles-list">
+  <h1>News & Reports</h1>
+
+  @if (articles().length === 0) {
+    <p>No articles published yet.</p>
+  }
+
+  <ul>
+    @for (article of articles(); track article.id) {
+      <li>
+        <a [routerLink]="['/articles', article.slug]">{{ article.title }}</a>
+        @if (article.publishedAt) {
+          <time [attr.datetime]="article.publishedAt">{{ article.publishedAt | date }}</time>
+        }
+      </li>
+    }
+  </ul>
+
+  <div class="pagination">
+    <button type="button" [disabled]="!hasPrevPage" (click)="loadPage(page() - 1)">Previous</button>
+    <span>Page {{ page() }}</span>
+    <button type="button" [disabled]="!hasNextPage" (click)="loadPage(page() + 1)">Next</button>
+  </div>
+</section>
