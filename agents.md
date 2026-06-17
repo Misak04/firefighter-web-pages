@@ -273,6 +273,11 @@ Browser
 5. **Delete branches after merge** — keep the branch list reflecting active work only.
 6. **Protect `main`** — require PR review (or at minimum a passing build) before merge once
    CI is in place; never force-push to `main`.
+7. **Keep `README.md` and `CHANGELOG.md` current** — in the project root and in every subfolder
+   that has its own (`backend/`, `frontend/`, and any future module dir). Any change that adds,
+   removes, or alters behavior in a folder must update that folder's `CHANGELOG.md` (`Unreleased`
+   section) and its `README.md` if setup/usage instructions changed, as part of the same branch —
+   not as a follow-up.
 
 ---
 
