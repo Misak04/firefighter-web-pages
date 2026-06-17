@@ -10,6 +10,7 @@ import { RedisModule } from './redis/redis.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
+import { ArticlesModule } from './articles/articles.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { RolesGuard } from './auth/guards/roles.guard';
     PrismaModule,
     RedisModule,
     AuthModule,
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [
