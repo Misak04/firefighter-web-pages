@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A modern firefighter unit website built with **Angular 18** (frontend) and **NestJS 10** (backend),
+A modern firefighter unit website built with **Angular 19** (frontend) and **NestJS 10** (backend),
 featuring a public-facing photo gallery, news/articles, equipment catalog, and a secure
 administration panel. Security is a first-class concern throughout the stack.
 
@@ -107,7 +107,7 @@ MIME type verification (not just extension), optional ClamAV scan.
 - User management (ADMIN only): create users, assign roles, revoke access
 - Audit log viewer
 
-**Stack:** Angular 18 + PrimeNG + Angular Signals (state)
+**Stack:** Angular 19 + PrimeNG + Angular Signals (state)
 
 **Security surface:** Token stored in memory (not localStorage); all API calls via interceptor
 that attaches bearer token; auto-logout on 401.
@@ -124,7 +124,7 @@ that attaches bearer token; auto-logout on 401.
 - Search bar (articles + technics)
 - SEO: Angular SSR (Universal), Open Graph meta tags per article
 
-**Stack:** Angular 18 (SSR) + PrimeNG + Angular Signals
+**Stack:** Angular 19 (SSR) + PrimeNG + Angular Signals
 
 ---
 
