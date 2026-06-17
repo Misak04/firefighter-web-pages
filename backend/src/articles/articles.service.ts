@@ -18,7 +18,9 @@ export class ArticlesService {
     if (q && q.trim().length > 0) {
       const [items, totalResult] = await Promise.all([
         this.prisma.$queryRaw<Article[]>`
-          SELECT * FROM "Article"
+          SELECT "id", "title", "slug", "body", "status", "authorId", "publishedAt",
+                 "featuredImageId", "createdAt", "updatedAt"
+          FROM "Article"
           WHERE status = 'PUBLISHED' AND "searchVector" @@ to_tsquery('english', ${this.toTsQuery(q)})
           ORDER BY "publishedAt" DESC
           LIMIT ${limit} OFFSET ${skip}
