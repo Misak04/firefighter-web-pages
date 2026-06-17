@@ -12,6 +12,16 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+`ng serve` proxies `/api/*` to `http://localhost:3000` (see `proxy.conf.json`), so the backend
+must be running for login and other API-backed pages to work locally.
+
+## FireFighter Web — Admin auth
+
+The admin panel lives under `/admin/*`. `/admin/login` is public; all other `/admin` routes are
+protected by `authGuard` and require a valid access token (kept in memory, never `localStorage`,
+per [agents.md](../agents.md#6-admin-agent-frontend)). See [CHANGELOG.md](CHANGELOG.md) for
+what's implemented so far.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:

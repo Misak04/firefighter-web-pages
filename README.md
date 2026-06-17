@@ -33,6 +33,8 @@ infra/      Nginx config, certs
    ```
 3. Backend health check: `http://localhost:3000/api/health`
 4. Frontend: `http://localhost:4000`
+5. Seed an initial admin user: `cd backend && npx prisma migrate dev && npx ts-node prisma/seed.ts`
+   (admin-invite only — there is no public signup)
 
 For local development without Docker, see `backend/README.md` and `frontend/README.md`.
 
