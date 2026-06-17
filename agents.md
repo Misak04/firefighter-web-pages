@@ -206,6 +206,20 @@ Browser
 
 ---
 
+## Git Branching Best Practices
+
+1. **Never commit directly to `main`** — all work happens on a branch, merged via PR.
+2. **Branch naming follows agent/domain scope:** `feature/<agent>-<short-desc>`,
+   `fix/<agent>-<short-desc>`, e.g. `feature/articles-search`, `fix/gallery-upload-validation`.
+3. **One branch per logical change** — keep branches small and focused on a single agent/domain
+   where possible to simplify review and rollback.
+4. **Rebase or merge `main` into your branch before opening a PR** to catch conflicts early.
+5. **Delete branches after merge** — keep the branch list reflecting active work only.
+6. **Protect `main`** — require PR review (or at minimum a passing build) before merge once
+   CI is in place; never force-push to `main`.
+
+---
+
 ## Security Principles
 
 1. **Zero trust on uploads** — validate MIME, extension, size; strip EXIF
