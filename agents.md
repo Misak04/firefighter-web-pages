@@ -171,6 +171,27 @@ Revision data is read-only — no endpoint allows editing or deleting past revis
 
 ---
 
+### 10. `testing-agent`
+**Domain:** Test Strategy & Quality Gates
+
+**Responsibilities:**
+- Backend unit/integration tests for each NestJS agent (services, guards, controllers)
+- Frontend unit tests for Angular components, services, and signals-based state
+- End-to-end tests covering critical public and admin flows (login, article publish,
+  photo upload, equipment CRUD, revision restore)
+- Security-focused test cases: auth bypass attempts, role escalation, upload validation
+  (MIME spoofing, oversized files), rate-limit enforcement
+- Coverage thresholds enforced in CI (fails build below target, e.g. 80% on core agents)
+- Test data/fixtures kept isolated from production data (seed scripts, not prod dumps)
+
+**Stack:** Jest (NestJS backend), Angular Testing Library + Jasmine/Karma or Vitest (frontend),
+Playwright or Cypress (e2e)
+
+**Security surface:** E2E and integration suites must include negative-path tests (unauthorized
+access, invalid input) for every endpoint listed in the Role Matrix — not just happy-path coverage.
+
+---
+
 ## Agent Communication Map
 
 ```
