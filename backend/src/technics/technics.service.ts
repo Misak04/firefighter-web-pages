@@ -43,12 +43,12 @@ export class TechnicsService {
   }
 
   async create(dto: CreateTechnicsDto) {
-    return this.prisma.technics.create({ data: dto });
+    return this.prisma.technics.create({ data: dto as Prisma.TechnicsCreateInput });
   }
 
   async update(id: string, dto: UpdateTechnicsDto) {
     await this.findOrThrow(id);
-    return this.prisma.technics.update({ where: { id }, data: dto });
+    return this.prisma.technics.update({ where: { id }, data: dto as Prisma.TechnicsUpdateInput });
   }
 
   async remove(id: string): Promise<void> {
