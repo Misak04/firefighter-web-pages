@@ -29,6 +29,7 @@ model User {
   lastLogin    DateTime?
   auditLogs    AuditLog[]
   articles     Article[]
+  media        Media[]
 }
 
 enum ArticleStatus {
