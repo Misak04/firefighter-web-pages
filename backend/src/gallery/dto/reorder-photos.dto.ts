@@ -1,10 +1,11 @@
 import { Type } from 'class-transformer';
-import { ArrayMinSize, IsArray, IsString, ValidateNested } from 'class-validator';
+import { ArrayMinSize, IsArray, IsInt, IsString, ValidateNested } from 'class-validator';
 
 class PhotoOrderEntry {
   @IsString()
   id!: string;
 
+  @IsInt()
   sortOrder!: number;
 }
 
