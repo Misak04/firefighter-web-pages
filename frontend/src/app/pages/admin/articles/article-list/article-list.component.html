@@ -1,1 +1,32 @@
-<p>article-list works!</p>
+<div class="article-admin-list">
+  <header>
+    <h1>Articles</h1>
+    <a routerLink="/admin/articles/new"><p-button label="New article" /></a>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Updated</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (article of articles(); track article.id) {
+        <tr>
+          <td>{{ article.title }}</td>
+          <td>
+            <p-tag [severity]="article.status === 'PUBLISHED' ? 'success' : 'warn'" [value]="article.status" />
+          </td>
+          <td>{{ article.updatedAt | date: 'short' }}</td>
+          <td>
+            <a [routerLink]="['/admin/articles', article.id]">Edit</a>
+            <button type="button" (click)="remove(article.id)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
