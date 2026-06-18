@@ -33,3 +33,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   (ADMIN only) — slug auto-generated and de-duplicated from title; `publishedAt` set on first
   transition to `PUBLISHED`.
 - Server-side HTML sanitization (`sanitize-html`) on article body before persist.
+- `Media`, `Event`, `Photo` Prisma models + migration (gallery: Year → Event → Photo hierarchy).
+- `MinioService` — bucket auto-created on startup, structured object keys
+  (`gallery/{year}/{eventId}/{variant}/{id}`), 1-hour presigned GET URLs generated at read time
+  (no direct public bucket access).
+- `POST /api/media/upload` (EDITOR+, multipart): MIME whitelist (JPEG/PNG/WebP), 20 MB limit,
+  Sharp-generated small (300px)/medium (800px) WebP thumbnails + re-encoded original, all with
+  EXIF metadata stripped. `DELETE /api/media/:id` (ADMIN) removes MinIO objects + DB row.
+- `GET /api/gallery/years`, `GET /api/gallery/years/:year/events`, `GET /api/gallery/events/:id`,
+  `GET /api/gallery/events/:id/photos` — public, paginated, photos include presigned media URLs.
+- `POST /api/gallery/events` (EDITOR+), `PATCH /api/gallery/events/:id` (EDITOR+),
+  `POST /api/gallery/events/:id/photos` (EDITOR+, attaches existing media to an event),
+  `PATCH /api/gallery/events/:id/photos/reorder` (EDITOR+), `DELETE /api/gallery/photos/:id`
+  (ADMIN, cascades to the underlying `Media` row + MinIO objects — orphan cleanup).
+- Shared `PaginationDto` extracted to `common/dto`; `QueryArticlesDto` now extends it.
