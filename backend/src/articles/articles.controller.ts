@@ -19,6 +19,18 @@ export class ArticlesController {
     return this.articlesService.findPublished(query);
   }
 
+  @Roles(Role.EDITOR, Role.ADMIN)
+  @Get('admin')
+  findAllForAdmin(@Query() query: QueryArticlesDto) {
+    return this.articlesService.findAllForAdmin(query);
+  }
+
+  @Roles(Role.EDITOR, Role.ADMIN)
+  @Get('admin/:id')
+  findOneForAdmin(@Param('id') id: string) {
+    return this.articlesService.findOneForAdmin(id);
+  }
+
   @Public()
   @Get(':slug')
   findPublishedBySlug(@Param('slug') slug: string) {
