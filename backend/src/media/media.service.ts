@@ -71,7 +71,10 @@ export class MediaService {
   }
 
   async deleteMedia(mediaId: string): Promise<void> {
-    const media = await this.prisma.media.findUniqueOrThrow({ where: { id: mediaId } });
+    const media = await this.prisma.media.findUnique({ where: { id: mediaId } });
+    if (!media) {
+      throw new NotFoundException('Media not found');
+    }
     await this.minio.removeObjects([media.originalKey, media.thumbSmallKey, media.thumbMediumKey]);
     await this.prisma.media.delete({ where: { id: mediaId } });
   }
