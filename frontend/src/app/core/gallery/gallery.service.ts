@@ -15,6 +15,10 @@ export class GalleryService {
     return this.http.get<GalleryEvent[]>(`/api/gallery/years/${year}/events`);
   }
 
+  getEvent(eventId: string): Observable<GalleryEvent> {
+    return this.http.get<GalleryEvent>(`/api/gallery/events/${eventId}`);
+  }
+
   listPhotosForEvent(eventId: string, page = 1, limit = 50): Observable<PhotoListResponse> {
     return this.http.get<PhotoListResponse>(`/api/gallery/events/${eventId}/photos`, {
       params: { page: String(page), limit: String(limit) },
