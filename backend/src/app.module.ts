@@ -27,6 +27,8 @@ import { GalleryModule } from './gallery/gallery.module';
     RedisModule,
     AuthModule,
     ArticlesModule,
+    MediaModule,
+    GalleryModule,
   ],
   controllers: [AppController],
   providers: [
