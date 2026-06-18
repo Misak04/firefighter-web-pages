@@ -3,6 +3,7 @@ import { GalleryService } from './gallery.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ReorderPhotosDto } from './dto/reorder-photos.dto';
+import { AttachPhotoDto } from './dto/attach-photo.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { Public } from '../auth/decorators/public.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
