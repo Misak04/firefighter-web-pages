@@ -100,6 +100,10 @@ export class GalleryService {
     await this.mediaService.deleteMedia(photo.mediaId);
   }
 
+  async getEvent(id: string) {
+    return this.findEventOrThrow(id);
+  }
+
   private async findEventOrThrow(id: string) {
     const event = await this.prisma.event.findUnique({ where: { id } });
     if (!event) {
