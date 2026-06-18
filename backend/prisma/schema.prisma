@@ -105,3 +105,45 @@ model Photo {
 
   @@index([eventId, sortOrder])
 }
+
+enum TechnicsCategory {
+  VEHICLE
+  PUMP
+  PERSONAL_GEAR
+  RESCUE_TOOL
+  COMMUNICATION
+  OTHER
+}
+
+enum TechnicsStatus {
+  ACTIVE
+  RETIRED
+}
+
+model Technics {
+  id           String           @id @default(uuid())
+  name         String
+  category     TechnicsCategory
+  manufacturer String?
+  yearAcquired Int?
+  description  String?
+  specs        Json?
+  status       TechnicsStatus   @default(ACTIVE)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  photos       TechnicsPhoto[]
+
+  @@index([category, status])
+}
+
+model TechnicsPhoto {
+  id         String   @id @default(uuid())
+  technicsId String
+  technics   Technics @relation(fields: [technicsId], references: [id])
+  mediaId    String   @unique
+  media      Media    @relation(fields: [mediaId], references: [id])
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@index([technicsId, sortOrder])
+}
