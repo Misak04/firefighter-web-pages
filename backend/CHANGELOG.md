@@ -23,3 +23,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Rate limiting via `@nestjs/throttler`: 5 req/min on `/auth/login`, 30 req/min default.
 - Global `ValidationPipe` (DTO whitelisting) and `cookie-parser` middleware.
 - `prisma/seed.ts` — seeds an initial ADMIN user (admin-invite only, no public signup).
+- `Article` Prisma model (title, slug, body, status, author, publishedAt, featuredImageId) with
+  a generated `tsvector` column (title weighted 'A', body weighted 'B') + GIN index for
+  PostgreSQL full-text search.
+- `GET /api/articles` — paginated, published-only public list, supports `?q=` full-text search.
+- `GET /api/articles/:slug` — public single published article (404 for drafts/unknown slugs).
+- `GET /api/articles/admin`, `GET /api/articles/admin/:id` — EDITOR+ listing/lookup including drafts.
+- `POST /api/articles` (EDITOR+), `PATCH /api/articles/:id` (EDITOR+), `DELETE /api/articles/:id`
+  (ADMIN only) — slug auto-generated and de-duplicated from title; `publishedAt` set on first
+  transition to `PUBLISHED`.
+- Server-side HTML sanitization (`sanitize-html`) on article body before persist.

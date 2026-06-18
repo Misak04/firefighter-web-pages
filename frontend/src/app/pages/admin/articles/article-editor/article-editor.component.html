@@ -1,0 +1,14 @@
+<form [formGroup]="form" class="article-editor">
+  <h1>{{ isNew() ? 'New article' : 'Edit article' }}</h1>
+
+  <label for="title">Title</label>
+  <input id="title" type="text" pInputText formControlName="title" />
+
+  <label for="editor">Body</label>
+  <div id="editor" #editorEl class="tiptap-editor"></div>
+
+  <div class="actions">
+    <p-button label="Save draft" [loading]="saving()" [disabled]="form.invalid" (onClick)="save('DRAFT')" />
+    <p-button label="Publish" [loading]="saving()" [disabled]="form.invalid" (onClick)="save('PUBLISHED')" />
+  </div>
+</form>

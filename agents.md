@@ -44,7 +44,10 @@ workflows, each can be developed, tested, and deployed independently.
 
 **Stack:** NestJS + Prisma + PostgreSQL
 
-**Security surface:** DOMPurify sanitization on all rich-text body content before persist.
+**Security surface:** Server-side HTML sanitization (`sanitize-html`) on all rich-text body
+content before persist. (DOMPurify requires a DOM; `isomorphic-dompurify`'s jsdom dependency
+pulls in an ESM-only transitive package that breaks NestJS's CommonJS build, so `sanitize-html`
+is used instead for equivalent allowlist-based sanitization.)
 
 ---
 
