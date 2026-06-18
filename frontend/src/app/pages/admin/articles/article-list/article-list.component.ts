@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ArticlesService } from '../../../../core/articles/articles.service';
@@ -8,7 +9,7 @@ import { Article } from '../../../../core/articles/article.model';
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [RouterLink, ButtonModule, TagModule],
+  imports: [RouterLink, ButtonModule, TagModule, DatePipe],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
 })
