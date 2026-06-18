@@ -8,8 +8,7 @@ const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
 
 interface UploadContext {
-  year: number;
-  eventId: string;
+  prefix: string;
   uploadedById: string;
 }
 
