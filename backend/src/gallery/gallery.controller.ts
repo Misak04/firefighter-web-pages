@@ -26,6 +26,12 @@ export class GalleryController {
   }
 
   @Public()
+  @Get('events/:id')
+  getEvent(@Param('id') id: string) {
+    return this.galleryService.getEvent(id);
+  }
+
+  @Public()
   @Get('events/:id/photos')
   listPhotosForEvent(@Param('id') id: string, @Query() query: PaginationDto) {
     return this.galleryService.listPhotosForEvent(id, query.page, query.limit);
