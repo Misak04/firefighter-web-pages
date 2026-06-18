@@ -75,16 +75,16 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 2 — Articles Module (Week 5–6)
 > Goal: Full CRUD for news/event reports with rich text
 
-- [ ] Article model: id, title, slug, body (text), status, authorId, publishedAt, featuredImageId
-- [ ] `GET /articles` — paginated public list (published only)
-- [ ] `GET /articles/:slug` — single article
-- [ ] `POST /articles` — create (EDITOR+)
-- [ ] `PATCH /articles/:id` — update (EDITOR+)
-- [ ] `DELETE /articles/:id` — delete (ADMIN only)
-- [ ] Full-text search: `GET /articles?q=`
-- [ ] Angular: public article list, article detail page, SEO meta tags
-- [ ] Admin: Quill/TipTap rich-text editor, draft/publish toggle
-- [ ] DOMPurify sanitization on body before save
+- [x] Article model: id, title, slug, body (text), status, authorId, publishedAt, featuredImageId
+- [x] `GET /articles` — paginated public list (published only)
+- [x] `GET /articles/:slug` — single article
+- [x] `POST /articles` — create (EDITOR+)
+- [x] `PATCH /articles/:id` — update (EDITOR+)
+- [x] `DELETE /articles/:id` — delete (ADMIN only)
+- [x] Full-text search: `GET /articles?q=`
+- [x] Angular: public article list, article detail page, SEO meta tags
+- [x] Admin: Quill/TipTap rich-text editor, draft/publish toggle
+- [x] Server-side HTML sanitization (`sanitize-html`) on body before save
 
 **Deliverable:** Editors can write, preview, and publish articles visible on homepage.
 
