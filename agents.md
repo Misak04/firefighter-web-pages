@@ -49,6 +49,15 @@ content before persist. (DOMPurify requires a DOM; `isomorphic-dompurify`'s jsdo
 pulls in an ESM-only transitive package that breaks NestJS's CommonJS build, so `sanitize-html`
 is used instead for equivalent allowlist-based sanitization.)
 
+**Migration gotcha:** `Article.searchVector` is a Postgres `GENERATED ALWAYS AS (...) STORED`
+column, declared in `schema.prisma` as `Unsupported("tsvector")`. Prisma's migration diff engine
+doesn't understand the generated expression, so any *new* migration that touches the schema will
+spuriously include `DROP INDEX "Article_searchVector_idx"` and
+`ALTER TABLE "Article" ALTER COLUMN "searchVector" DROP DEFAULT` — both invalid against a
+generated column and will fail the migration. Before applying a freshly generated migration that
+touches anything, check its SQL for these two statements and delete them; the column and its
+index are unaffected by unrelated schema changes and don't need to be touched.
+
 ---
 
 ### 3. `gallery-agent`
