@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import * as sharp from 'sharp';
+import sharp = require('sharp');
 import { randomUUID } from 'crypto';
 import { MinioService } from './minio.service';
 import { PrismaService } from '../prisma/prisma.service';
