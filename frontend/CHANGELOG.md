@@ -25,3 +25,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Admin `/admin/articles` list (with draft/published `p-tag`, delete) and
   `/admin/articles/:id` editor (TipTap rich-text body, draft/publish actions); `:id` of `new`
   creates a new article.
+- Public gallery: `/gallery` (year grid), `/gallery/:year` (event grid), `/gallery/:year/:event`
+  (PrimeNG `p-galleria` lightbox with thumbnail strip), all SSR per-request and wired to the
+  backend `GalleryService`.
+- Admin `/admin/gallery` (event list + create form) and `/admin/gallery/:eventId` (multi-file
+  upload, photo grid with delete and up/down reorder), client-rendered like the rest of `/admin`.

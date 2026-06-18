@@ -93,17 +93,17 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 3 — Media & Gallery Module (Week 7–9)
 > Goal: Photo upload, thumbnail generation, year/event gallery
 
-- [ ] Media model: id, filename, originalUrl, thumbUrl (S, M), size, mimeType, uploadedById
-- [ ] Event model: id, name, year, description, coverPhotoId
-- [ ] Photo model: id, mediaId, eventId, title, sortOrder
-- [ ] `POST /media/upload` — multipart, validate MIME+size, Sharp thumbnails, MinIO store
-- [ ] `DELETE /media/:id` — delete from MinIO + DB (ADMIN)
-- [ ] `GET /gallery/years` — list distinct years
-- [ ] `GET /gallery/years/:year/events` — events for a year
-- [ ] `GET /gallery/events/:id/photos` — paginated photos
-- [ ] EXIF strip on all uploads (Sharp metadata: false)
-- [ ] Angular: year selector → event grid → photo lightbox (PrimeNG Galleria)
-- [ ] Admin: bulk upload, event creation/assignment, photo reorder, delete
+- [x] Media model: id, filename, originalUrl, thumbUrl (S, M), size, mimeType, uploadedById
+- [x] Event model: id, name, year, description, coverPhotoId
+- [x] Photo model: id, mediaId, eventId, title, sortOrder
+- [x] `POST /media/upload` — multipart, validate MIME+size, Sharp thumbnails, MinIO store
+- [x] `DELETE /media/:id` — delete from MinIO + DB (ADMIN)
+- [x] `GET /gallery/years` — list distinct years
+- [x] `GET /gallery/years/:year/events` — events for a year
+- [x] `GET /gallery/events/:id/photos` — paginated photos
+- [x] EXIF strip on all uploads (Sharp strips metadata by default unless `.withMetadata()` is called)
+- [x] Angular: year selector → event grid → photo lightbox (PrimeNG Galleria)
+- [x] Admin: bulk upload, event creation/assignment, photo reorder, delete
 
 **Deliverable:** Full gallery browsable publicly; admin can upload and organize photos.
 

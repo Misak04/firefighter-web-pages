@@ -1,1 +1,41 @@
-<p>gallery works!</p>
+@if (!year()) {
+  <section class="gallery-years">
+    <h1>Gallery</h1>
+    <ul>
+      @for (y of years(); track y) {
+        <li><a [routerLink]="['/gallery', y]">{{ y }}</a></li>
+      }
+    </ul>
+  </section>
+} @else if (!eventId()) {
+  <section class="gallery-events">
+    <h1>{{ year() }}</h1>
+    <ul>
+      @for (event of events(); track event.id) {
+        <li>
+          <a [routerLink]="['/gallery', year(), event.id]">{{ event.name }}</a>
+          @if (event.description) {
+            <p>{{ event.description }}</p>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+} @else {
+  <section class="gallery-photos">
+    <p-galleria
+      [value]="photos()"
+      [numVisible]="5"
+      [circular]="true"
+      [showThumbnails]="true"
+      [containerStyle]="{ 'max-width': '800px' }"
+    >
+      <ng-template #item let-photo>
+        <img [src]="photo.media.thumbMediumUrl" [alt]="photo.title ?? ''" style="width: 100%; display: block" />
+      </ng-template>
+      <ng-template #thumbnail let-photo>
+        <img [src]="photo.media.thumbSmallUrl" [alt]="photo.title ?? ''" />
+      </ng-template>
+    </p-galleria>
+  </section>
+}

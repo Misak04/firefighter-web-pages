@@ -1,0 +1,18 @@
+<div class="admin-gallery-events">
+  <h1>Gallery Events</h1>
+
+  <form [formGroup]="form" (ngSubmit)="createEvent()" class="create-event-form">
+    <input type="text" pInputText formControlName="name" placeholder="Event name" />
+    <input type="number" pInputText formControlName="year" placeholder="Year" />
+    <input type="text" pInputText formControlName="description" placeholder="Description (optional)" />
+    <p-button type="submit" label="Create event" [loading]="creating()" [disabled]="form.invalid" />
+  </form>
+
+  <ul>
+    @for (event of events(); track event.id) {
+      <li>
+        <a [routerLink]="['/admin/gallery', event.id]">{{ event.name }} ({{ event.year }})</a>
+      </li>
+    }
+  </ul>
+</div>

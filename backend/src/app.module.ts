@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { ArticlesModule } from './articles/articles.module';
+import { MediaModule } from './media/media.module';
+import { GalleryModule } from './gallery/gallery.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { ArticlesModule } from './articles/articles.module';
     RedisModule,
     AuthModule,
     ArticlesModule,
+    MediaModule,
+    GalleryModule,
   ],
   controllers: [AppController],
   providers: [

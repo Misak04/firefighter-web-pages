@@ -10,4 +10,5 @@ export const envValidationSchema = Joi.object({
   MINIO_ENDPOINT: Joi.string().required(),
   MINIO_ACCESS_KEY: Joi.string().required(),
   MINIO_SECRET_KEY: Joi.string().required(),
+  MINIO_BUCKET: Joi.string().default('gallery'),
 });
