@@ -30,6 +30,7 @@ import { TechnicsModule } from './technics/technics.module';
     ArticlesModule,
     MediaModule,
     GalleryModule,
+    TechnicsModule,
   ],
   controllers: [AppController],
   providers: [
