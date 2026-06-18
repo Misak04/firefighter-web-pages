@@ -13,6 +13,8 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
-COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
+# tsc only compiles .ts -> .js; Prisma's query engine binary is a non-TS asset that must be
+# copied in separately so it ends up alongside the compiled client at dist/generated/prisma.
+COPY --from=build /app/generated/prisma ./dist/generated/prisma
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]
