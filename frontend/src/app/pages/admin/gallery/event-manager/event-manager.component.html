@@ -1,1 +1,23 @@
-<p>event-manager works!</p>
+@if (event(); as e) {
+  <div class="event-manager">
+    <h1>{{ e.name }} ({{ e.year }})</h1>
+
+    <input type="file" accept="image/jpeg,image/png,image/webp" multiple #fileInput (change)="onFilesSelected(fileInput)" />
+    @if (uploading()) {
+      <p>Uploading...</p>
+    }
+
+    <ul class="photo-grid">
+      @for (photo of photos(); track photo.id) {
+        <li>
+          <img [src]="photo.media.thumbSmallUrl" [alt]="photo.title ?? ''" />
+          <div class="actions">
+            <button type="button" (click)="move(photo, -1)">Up</button>
+            <button type="button" (click)="move(photo, 1)">Down</button>
+            <button type="button" (click)="deletePhoto(photo.id)">Delete</button>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+}
