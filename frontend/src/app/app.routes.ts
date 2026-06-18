@@ -26,6 +26,20 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'admin/gallery',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/gallery/gallery-events/gallery-events.component').then(
+        (m) => m.GalleryEventsComponent,
+      ),
+  },
+  {
+    path: 'admin/gallery/:eventId',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/gallery/event-manager/event-manager.component').then((m) => m.EventManagerComponent),
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
