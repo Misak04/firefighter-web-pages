@@ -12,6 +12,20 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   {
+    path: 'admin/articles',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/articles/article-list/article-list.component').then((m) => m.ArticleListComponent),
+  },
+  {
+    path: 'admin/articles/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/articles/article-editor/article-editor.component').then(
+        (m) => m.ArticleEditorComponent,
+      ),
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
