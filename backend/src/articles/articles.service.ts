@@ -45,6 +45,16 @@ export class ArticlesService {
     return { items, total, page, limit };
   }
 
+  async findAllForAdmin(query: QueryArticlesDto) {
+    const { page, limit } = query;
+    const skip = (page - 1) * limit;
+    const [items, total] = await Promise.all([
+      this.prisma.article.findMany({ orderBy: { createdAt: 'desc' }, skip, take: limit }),
+      this.prisma.article.count(),
+    ]);
+    return { items, total, page, limit };
+  }
+
   async findPublishedBySlug(slug: string) {
     const article = await this.prisma.article.findUnique({ where: { slug } });
     if (!article || article.status !== ArticleStatus.PUBLISHED) {
