@@ -44,6 +44,12 @@ export class GalleryController {
   }
 
   @Roles(Role.EDITOR, Role.ADMIN)
+  @Post('events/:id/photos')
+  attachPhoto(@Param('id') id: string, @Body() dto: AttachPhotoDto) {
+    return this.galleryService.attachPhoto(id, dto.mediaId, dto.title);
+  }
+
+  @Roles(Role.EDITOR, Role.ADMIN)
   @Patch('events/:id/photos/reorder')
   reorderPhotos(@Param('id') id: string, @Body() dto: ReorderPhotosDto) {
     return this.galleryService.reorderPhotos(id, dto);
