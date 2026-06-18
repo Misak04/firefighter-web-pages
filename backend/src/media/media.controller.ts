@@ -36,7 +36,10 @@ export class MediaController {
       throw new BadRequestException('No file provided');
     }
     const user = req.user as AccessTokenPayload;
-    const media = await this.mediaService.upload(file, { year, eventId, uploadedById: user.sub });
+    const media = await this.mediaService.upload(file, {
+      prefix: `gallery/${year}/${eventId}`,
+      uploadedById: user.sub,
+    });
     return this.mediaService.withPresignedUrls(media);
   }
 
