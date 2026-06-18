@@ -284,6 +284,26 @@ Browser
 
 ---
 
+## Working Autonomously
+
+Day-to-day implementation work (writing code, running builds/tests, running local dev servers
+and Docker containers for verification, creating commits on a feature branch, merging a
+completed feature branch into `main`) should proceed without stopping to ask for permission —
+treat an explicit task request as authorization to carry it through to a verified, working
+state.
+
+Only stop and ask first for actions with real-world or hard-to-reverse consequences, e.g.:
+- Pushing to the remote / GitHub (`git push`)
+- Force-pushing, `git reset --hard`, deleting branches/tags that weren't just created in this
+  session, rewriting published history
+- Dropping or truncating a database, deleting production/shared data
+- Changing CI/CD pipelines, deployment config, or infrastructure that affects shared environments
+- Installing/removing dependencies with security or licensing implications, or upgrading a
+  major framework version
+- Sending anything externally visible (PR comments, issue updates, notifications)
+
+---
+
 ## Security Principles
 
 1. **Zero trust on uploads** — validate MIME, extension, size; strip EXIF
