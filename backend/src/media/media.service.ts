@@ -31,11 +31,12 @@ export class MediaService {
     const id = randomUUID();
     const prefix = `gallery/${ctx.year}/${ctx.eventId}`;
 
-    // .rotate() auto-orients from EXIF before withMetadata(false) strips it, so visual
-    // orientation is preserved even though the EXIF block itself is removed.
-    const original = await sharp(file.buffer).rotate().withMetadata(false).toBuffer();
-    const small = await sharp(file.buffer).rotate().resize({ width: 300 }).webp().withMetadata(false).toBuffer();
-    const medium = await sharp(file.buffer).rotate().resize({ width: 800 }).webp().withMetadata(false).toBuffer();
+    // .rotate() auto-orients from EXIF before re-encoding; sharp strips all metadata
+    // (including EXIF) on output unless .withMetadata() is explicitly called, so the
+    // visual orientation is preserved even though the EXIF block itself is removed.
+    const original = await sharp(file.buffer).rotate().toBuffer();
+    const small = await sharp(file.buffer).rotate().resize({ width: 300 }).webp().toBuffer();
+    const medium = await sharp(file.buffer).rotate().resize({ width: 800 }).webp().toBuffer();
 
     const originalKey = `${prefix}/original/${id}`;
     const thumbSmallKey = `${prefix}/small/${id}.webp`;
