@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as sharp from 'sharp';
 import { randomUUID } from 'crypto';
 import { MinioService } from './minio.service';
