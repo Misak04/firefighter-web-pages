@@ -63,3 +63,44 @@ model AuditLog {
   user      User?    @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model Media {
+  id             String   @id @default(uuid())
+  filename       String
+  originalKey    String
+  thumbSmallKey  String
+  thumbMediumKey String
+  size           Int
+  mimeType       String
+  uploadedById   String
+  uploadedBy     User     @relation(fields: [uploadedById], references: [id])
+  createdAt      DateTime @default(now())
+  photo          Photo?
+}
+
+model Event {
+  id           String   @id @default(uuid())
+  name         String
+  year         Int
+  description  String?
+  coverPhotoId String?  @unique
+  coverPhoto   Photo?   @relation("EventCoverPhoto", fields: [coverPhotoId], references: [id])
+  photos       Photo[]  @relation("EventPhotos")
+  createdAt    DateTime @default(now())
+
+  @@index([year])
+}
+
+model Photo {
+  id           String   @id @default(uuid())
+  mediaId      String   @unique
+  media        Media    @relation(fields: [mediaId], references: [id])
+  eventId      String
+  event        Event    @relation("EventPhotos", fields: [eventId], references: [id])
+  title        String?
+  sortOrder    Int      @default(0)
+  coverOfEvent Event?   @relation("EventCoverPhoto")
+  createdAt    DateTime @default(now())
+
+  @@index([eventId, sortOrder])
+}
