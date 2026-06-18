@@ -76,6 +76,7 @@ model Media {
   uploadedBy     User     @relation(fields: [uploadedById], references: [id])
   createdAt      DateTime @default(now())
   photo          Photo?
+  technicsPhoto  TechnicsPhoto?
 }
 
 model Event {
