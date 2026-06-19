@@ -8,8 +8,7 @@ const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
 
 interface UploadContext {
-  year: number;
-  eventId: string;
+  prefix: string;
   uploadedById: string;
 }
 
@@ -29,7 +28,7 @@ export class MediaService {
     }
 
     const id = randomUUID();
-    const prefix = `gallery/${ctx.year}/${ctx.eventId}`;
+    const prefix = ctx.prefix;
 
     // .rotate() auto-orients from EXIF before re-encoding; sharp strips all metadata
     // (including EXIF) on output unless .withMetadata() is explicitly called, so the

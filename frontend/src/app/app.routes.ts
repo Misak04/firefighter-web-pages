@@ -40,6 +40,20 @@ export const routes: Routes = [
       import('./pages/admin/gallery/event-manager/event-manager.component').then((m) => m.EventManagerComponent),
   },
   {
+    path: 'admin/technics',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/technics/technics-list/technics-list.component').then((m) => m.TechnicsListComponent),
+  },
+  {
+    path: 'admin/technics/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/admin/technics/technics-editor/technics-editor.component').then(
+        (m) => m.TechnicsEditorComponent,
+      ),
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },

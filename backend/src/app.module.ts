@@ -13,6 +13,7 @@ import { RolesGuard } from './auth/guards/roles.guard';
 import { ArticlesModule } from './articles/articles.module';
 import { MediaModule } from './media/media.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { TechnicsModule } from './technics/technics.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { GalleryModule } from './gallery/gallery.module';
     ArticlesModule,
     MediaModule,
     GalleryModule,
+    TechnicsModule,
   ],
   controllers: [AppController],
   providers: [

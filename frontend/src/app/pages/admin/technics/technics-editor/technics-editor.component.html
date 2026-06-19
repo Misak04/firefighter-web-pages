@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="save()" class="technics-editor">
+  <h1>{{ isNew() ? 'New technics item' : 'Edit technics item' }}</h1>
+
+  <label for="name">Name</label>
+  <input id="name" type="text" pInputText formControlName="name" />
+
+  <label for="category">Category</label>
+  <p-select id="category" formControlName="category" [options]="categories" />
+
+  <label for="manufacturer">Manufacturer</label>
+  <input id="manufacturer" type="text" pInputText formControlName="manufacturer" />
+
+  <label for="yearAcquired">Year acquired</label>
+  <input id="yearAcquired" type="number" pInputText formControlName="yearAcquired" />
+
+  <label for="description">Description</label>
+  <input id="description" type="text" pInputText formControlName="description" />
+
+  <p-button type="submit" label="Save" [loading]="saving()" [disabled]="form.invalid" />
+
+  @if (!isNew()) {
+    <div class="photos">
+      <h2>Photos</h2>
+      <input type="file" accept="image/jpeg,image/png,image/webp" #fileInput (change)="onFileSelected(fileInput)" />
+      <ul class="photo-grid">
+        @for (photo of photos(); track photo.id) {
+          <li>
+            <img [src]="photo.media.thumbSmallUrl" alt="" />
+            <button type="button" (click)="removePhoto(photo.id)">Delete</button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</form>

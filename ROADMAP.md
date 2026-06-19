@@ -112,14 +112,15 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 4 — Technics Module (Week 10–11)
 > Goal: Equipment catalog with categories and photos
 
-- [ ] Technics model: id, name, category (enum), manufacturer, yearAcquired, description, specs (JSON), status, photos[]
-- [ ] `GET /technics` — public list, filterable by category/status
-- [ ] `GET /technics/:id` — detail
-- [ ] `POST /technics` — create (EDITOR+)
-- [ ] `PATCH /technics/:id` — update (EDITOR+)
-- [ ] `DELETE /technics/:id` — delete (ADMIN)
-- [ ] Angular: category tabs, equipment cards, detail modal with photo gallery
-- [ ] Admin: CRUD form, photo attachment from media library
+- [x] Technics model: id, name, category (enum), manufacturer, yearAcquired, description, specs (JSON), status, photos[]
+- [x] `GET /technics` — public list, filterable by category/status
+- [x] `GET /technics/:id` — detail
+- [x] `POST /technics` — create (EDITOR+)
+- [x] `PATCH /technics/:id` — update (EDITOR+)
+- [x] `DELETE /technics/:id` — delete (ADMIN)
+- [x] Angular: category tabs, equipment cards, detail modal with photo gallery
+- [x] Admin: CRUD form, photo attachment (direct upload+attach rather than a separate media-library
+      browser, since no such browser exists elsewhere in the app yet)
 
 **Deliverable:** Equipment catalog visible publicly, manageable in admin.
 

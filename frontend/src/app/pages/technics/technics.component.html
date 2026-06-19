@@ -1,1 +1,50 @@
-<p>technics works!</p>
+<section class="technics-page">
+  <h1>Equipment Catalog</h1>
+
+  <p-tabs [value]="categories[0]" (valueChange)="loadCategory($event)">
+    <p-tablist>
+      @for (category of categories; track category) {
+        <p-tab [value]="category">{{ category.replace('_', ' ') }}</p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels>
+      @for (category of categories; track category) {
+        <p-tabpanel [value]="category">
+          <div class="technics-grid">
+            @for (item of items(); track item.id) {
+              <p-card [header]="item.name" (click)="open(item)" class="technics-card">
+                @if (item.photos.length > 0) {
+                  <img [src]="item.photos[0].media.thumbSmallUrl" [alt]="item.name" />
+                }
+                <p>{{ item.manufacturer }}</p>
+                <p>{{ item.status }}</p>
+              </p-card>
+            }
+          </div>
+        </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+
+  <p-dialog [visible]="!!selected()" (visibleChange)="close()" [modal]="true" [style]="{ width: '600px' }">
+    @if (selected(); as selectedItem) {
+      <ng-template #header>
+        <span>{{ selectedItem.name }}</span>
+      </ng-template>
+      <p>{{ selectedItem.description }}</p>
+      <p>Manufacturer: {{ selectedItem.manufacturer }}</p>
+      <p>Year acquired: {{ selectedItem.yearAcquired }}</p>
+      <p>Status: {{ selectedItem.status }}</p>
+      @if (selectedItem.photos.length > 0) {
+        <p-galleria [value]="selectedItem.photos" [numVisible]="3" [showThumbnails]="true">
+          <ng-template #item let-photo>
+            <img [src]="photo.media.thumbMediumUrl" [alt]="selectedItem.name" style="width: 100%; display: block" />
+          </ng-template>
+          <ng-template #thumbnail let-photo>
+            <img [src]="photo.media.thumbSmallUrl" [alt]="selectedItem.name" />
+          </ng-template>
+        </p-galleria>
+      }
+    }
+  </p-dialog>
+</section>
