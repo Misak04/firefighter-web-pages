@@ -52,7 +52,11 @@ export class TechnicsService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.findOrThrow(id);
+    const technics = await this.findOrThrow(id, true);
+    for (const photo of technics.photos) {
+      await this.prisma.technicsPhoto.delete({ where: { id: photo.id } });
+      await this.mediaService.deleteMedia(photo.mediaId);
+    }
     await this.prisma.technics.delete({ where: { id } });
   }
 
