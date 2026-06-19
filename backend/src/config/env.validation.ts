@@ -11,4 +11,9 @@ export const envValidationSchema = Joi.object({
   MINIO_ACCESS_KEY: Joi.string().required(),
   MINIO_SECRET_KEY: Joi.string().required(),
   MINIO_BUCKET: Joi.string().default('gallery'),
+  FRONTEND_URL: Joi.string().default('http://localhost:4000'),
+  CSRF_SECRET: Joi.string().min(32).required(),
+  CLAMAV_ENABLED: Joi.boolean().default(false),
+  CLAMAV_HOST: Joi.string().default('clamav'),
+  CLAMAV_PORT: Joi.number().default(3310),
 });
