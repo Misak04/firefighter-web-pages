@@ -1,1 +1,32 @@
-<p>technics-list works!</p>
+<div class="admin-technics-list">
+  <header>
+    <h1>Technics</h1>
+    <a routerLink="/admin/technics/new"><p-button label="New item" /></a>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items(); track item.id) {
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td>
+            <p-tag [severity]="item.status === 'ACTIVE' ? 'success' : 'warn'" [value]="item.status" />
+          </td>
+          <td>
+            <a [routerLink]="['/admin/technics', item.id]">Edit</a>
+            <button type="button" (click)="remove(item.id)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
