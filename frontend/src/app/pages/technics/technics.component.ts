@@ -24,8 +24,8 @@ export class TechnicsComponent implements OnInit {
     this.loadCategory(this.categories[0]);
   }
 
-  loadCategory(category: TechnicsCategory): void {
-    this.technicsService.list(category).subscribe((res) => this.items.set(res.items));
+  loadCategory(category: string | number): void {
+    this.technicsService.list(category as TechnicsCategory).subscribe((res) => this.items.set(res.items));
   }
 
   open(item: Technics): void {
