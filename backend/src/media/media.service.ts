@@ -3,6 +3,7 @@ import * as sharp from 'sharp';
 import { randomUUID } from 'crypto';
 import { fromBuffer } from 'file-type';
 import { MinioService } from './minio.service';
+import { ClamAvService } from './clamav.service';
 import { PrismaService } from '../prisma/prisma.service';
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
