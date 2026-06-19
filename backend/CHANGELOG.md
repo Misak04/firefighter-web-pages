@@ -58,3 +58,21 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `PATCH /api/technics/:id/photos/reorder` (EDITOR+), `DELETE /api/technics/photos/:photoId` (EDITOR+).
 - `MediaService.upload()` generalized to take a storage-path `prefix` instead of gallery-specific
   `{year, eventId}`, so both the gallery and technics uploads share the same Sharp/MinIO pipeline.
+- Helmet (CSP, HSTS, frame-ancestors `'none'`, etc.) on the backend; CORS locked to `FRONTEND_URL`
+  with `credentials: true` instead of the previous allow-all default.
+- CSRF double-submit cookie protection (`csrf-csrf`) on `/auth/refresh` and `/auth/logout` — the
+  only cookie-authenticated mutating endpoints. `GET`-free; the token is issued alongside the
+  access token on login/refresh (`{ accessToken, csrfToken }`) and must be echoed via
+  `X-CSRF-Token` on those two routes.
+- Stricter rate limits on file uploads (10 req/min on `/media/upload` and
+  `/technics/:id/photos/upload`) on top of the existing global/login throttling.
+- Upload content validation hardened: actual file-content sniffing (`file-type`) cross-checked
+  against the MIME allowlist (rejects a malicious file renamed with an image extension), and Sharp
+  processing errors are now caught and returned as a clean 400 instead of a 500.
+- `UploadMediaDto` replaces unvalidated raw `@Body('eventId')`/`@Body('year')` fields on
+  `POST /api/media/upload`.
+- Optional ClamAV scan on uploads (`ClamAvService`, `CLAMAV_ENABLED` env flag, off by default) —
+  fail-closed (rejects the upload) if enabled but clamd is unreachable. Compose service gated
+  behind the `clamav` profile so it doesn't slow down default `docker compose up`.
+- `SECURITY.md` — OWASP Top 10 walkthrough mapping each category to its mitigation in this codebase,
+  plus a documented list of known gaps/accepted risk.
