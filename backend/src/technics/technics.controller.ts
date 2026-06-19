@@ -66,6 +66,7 @@ export class TechnicsController {
   }
 
   @Roles(Role.EDITOR, Role.ADMIN)
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post(':id/photos/upload')
   @UseInterceptors(FileInterceptor('file', { limits: { fileSize: MAX_FILE_SIZE_BYTES } }))
   async uploadPhoto(@Param('id') id: string, @UploadedFile() file: Express.Multer.File, @Req() req: Request) {
