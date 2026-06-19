@@ -1,19 +1,9 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Param,
-  ParseIntPipe,
-  Post,
-  Req,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Param, Post, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import type { Request } from 'express';
 import { MediaService } from './media.service';
+import { UploadMediaDto } from './dto/upload-media.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../../generated/prisma/enums';
 import { AccessTokenPayload } from '../auth/auth.types';
