@@ -38,6 +38,8 @@ export class MediaService {
       throw new BadRequestException('File content does not match an allowed image type.');
     }
 
+    await this.clamav.scan(file.buffer);
+
     const id = randomUUID();
     const prefix = ctx.prefix;
 
