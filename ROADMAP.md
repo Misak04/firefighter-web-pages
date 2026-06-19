@@ -129,16 +129,19 @@ Self-hosted with Docker. Automated backups. Clear deployment docs. No vendor loc
 ### Phase 5 — Security Hardening (Week 12)
 > Goal: Production-grade security across all layers
 
-- [ ] Helmet.js: CSP, X-Frame-Options, HSTS headers
-- [ ] CORS: whitelist only own domain
-- [ ] CSRF: double-submit cookie on all mutation endpoints
-- [ ] `@nestjs/throttler` global + per-route limits
-- [ ] Input validation audit: every DTO reviewed for missing validators
-- [ ] File upload: ClamAV integration (optional, configurable)
-- [ ] Secrets audit: no hardcoded values anywhere
-- [ ] Nginx: block `/.env`, `/.git`, `/.htaccess`, common scanner paths
-- [ ] Dependency audit: `npm audit`, update outdated packages
-- [ ] Penetration test checklist walkthrough (OWASP Top 10)
+- [x] Helmet.js: CSP, X-Frame-Options, HSTS headers
+- [x] CORS: whitelist only own domain
+- [x] CSRF: double-submit cookie on cookie-authenticated mutation endpoints (`/auth/refresh`,
+      `/auth/logout` — the only ones not protected by Bearer-token auth's inherent CSRF resistance)
+- [x] `@nestjs/throttler` global + per-route limits
+- [x] Input validation audit: every DTO reviewed for missing validators (see `SECURITY.md` for the
+      two real gaps found and fixed: spoofable upload MIME type, unvalidated upload body fields)
+- [x] File upload: ClamAV integration (optional, configurable via `CLAMAV_ENABLED`, fail-closed)
+- [x] Secrets audit: no hardcoded values found
+- [x] Nginx: block `/.env`, `/.git`, `/.htaccess`, common scanner paths
+- [~] Dependency audit: `npm audit` is not runnable in this sandboxed dev environment (internal
+      registry mirror doesn't support the audit endpoint) — must run in CI before release
+- [x] Penetration test checklist walkthrough (OWASP Top 10) — see `SECURITY.md`
 
 **Deliverable:** Security checklist complete; no critical/high vulnerabilities.
 
