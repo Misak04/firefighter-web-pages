@@ -1,9 +1,11 @@
-import { Body, Controller, HttpCode, Post, Req, Res, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, HttpCode, Inject, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './decorators/public.decorator';
+import { CSRF_UTILS, CsrfUtils } from './csrf.provider';
+import { CsrfGuard } from './guards/csrf.guard';
 
 const REFRESH_COOKIE = 'refresh_token';
 const REFRESH_COOKIE_OPTIONS = {
@@ -16,7 +18,10 @@ const REFRESH_COOKIE_OPTIONS = {
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    @Inject(CSRF_UTILS) private readonly csrf: CsrfUtils,
+  ) {}
 
   @Public()
   @Post('login')
@@ -24,10 +29,12 @@ export class AuthController {
   async login(@Body() dto: LoginDto, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const { accessToken, refreshToken } = await this.authService.login(dto.email, dto.password, req.ip);
     res.cookie(REFRESH_COOKIE, refreshToken, REFRESH_COOKIE_OPTIONS);
-    return { accessToken };
+    const csrfToken = this.csrf.generateCsrfToken(req, res, { overwrite: true });
+    return { accessToken, csrfToken };
   }
 
   @Public()
+  @UseGuards(CsrfGuard)
   @Post('refresh')
   @HttpCode(200)
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
@@ -37,10 +44,12 @@ export class AuthController {
     }
     const tokens = await this.authService.refresh(refreshToken, req.ip);
     res.cookie(REFRESH_COOKIE, tokens.refreshToken, REFRESH_COOKIE_OPTIONS);
-    return { accessToken: tokens.accessToken };
+    const csrfToken = this.csrf.generateCsrfToken(req, res, { overwrite: true });
+    return { accessToken: tokens.accessToken, csrfToken };
   }
 
   @Public()
+  @UseGuards(CsrfGuard)
   @Post('logout')
   @HttpCode(200)
   async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {

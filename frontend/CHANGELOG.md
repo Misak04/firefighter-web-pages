@@ -35,3 +35,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Admin `/admin/technics` list (status `p-tag`, delete) and `/admin/technics/:id` editor
   (name/category/manufacturer/year/description form, single-file photo upload, photo delete);
   `:id` of `new` creates a new item.
+- Helmet (CSP, HSTS, frame-ancestors `'none'`, etc.) added to the Express SSR server (`server.ts`)
+  — this is the server that actually delivers HTML to browsers, so headers matter most here.
+- `AuthService` now stores the `csrfToken` returned alongside the access token on login/refresh,
+  and sends it via `X-CSRF-Token` on `/auth/refresh` and `/auth/logout` calls (backend CSRF
+  double-submit protection — see `backend/CHANGELOG.md`).

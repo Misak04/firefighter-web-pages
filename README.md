@@ -47,3 +47,7 @@ never commit directly to `main`.
 
 - [backend/CHANGELOG.md](backend/CHANGELOG.md)
 - [frontend/CHANGELOG.md](frontend/CHANGELOG.md)
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for the OWASP Top 10 walkthrough and known gaps.
