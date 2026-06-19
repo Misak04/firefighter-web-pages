@@ -11,6 +11,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Throttle } from '@nestjs/throttler';
 import type { Request } from 'express';
 import { MediaService } from './media.service';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -24,6 +25,7 @@ export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
 
   @Roles(Role.EDITOR, Role.ADMIN)
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', { limits: { fileSize: MAX_FILE_SIZE_BYTES } }))
   async upload(
