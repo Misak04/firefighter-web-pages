@@ -27,21 +27,21 @@
   </p-tabs>
 
   <p-dialog [visible]="!!selected()" (visibleChange)="close()" [modal]="true" [style]="{ width: '600px' }">
-    @if (selected(); as item) {
+    @if (selected(); as selectedItem) {
       <ng-template #header>
-        <span>{{ item.name }}</span>
+        <span>{{ selectedItem.name }}</span>
       </ng-template>
-      <p>{{ item.description }}</p>
-      <p>Manufacturer: {{ item.manufacturer }}</p>
-      <p>Year acquired: {{ item.yearAcquired }}</p>
-      <p>Status: {{ item.status }}</p>
-      @if (item.photos.length > 0) {
-        <p-galleria [value]="item.photos" [numVisible]="3" [showThumbnails]="true">
+      <p>{{ selectedItem.description }}</p>
+      <p>Manufacturer: {{ selectedItem.manufacturer }}</p>
+      <p>Year acquired: {{ selectedItem.yearAcquired }}</p>
+      <p>Status: {{ selectedItem.status }}</p>
+      @if (selectedItem.photos.length > 0) {
+        <p-galleria [value]="selectedItem.photos" [numVisible]="3" [showThumbnails]="true">
           <ng-template #item let-photo>
-            <img [src]="photo.media.thumbMediumUrl" [alt]="item.name" style="width: 100%; display: block" />
+            <img [src]="photo.media.thumbMediumUrl" [alt]="selectedItem.name" style="width: 100%; display: block" />
           </ng-template>
           <ng-template #thumbnail let-photo>
-            <img [src]="photo.media.thumbSmallUrl" [alt]="item.name" />
+            <img [src]="photo.media.thumbSmallUrl" [alt]="selectedItem.name" />
           </ng-template>
         </p-galleria>
       }
