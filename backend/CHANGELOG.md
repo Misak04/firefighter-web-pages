@@ -47,3 +47,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `PATCH /api/gallery/events/:id/photos/reorder` (EDITOR+), `DELETE /api/gallery/photos/:id`
   (ADMIN, cascades to the underlying `Media` row + MinIO objects — orphan cleanup).
 - Shared `PaginationDto` extracted to `common/dto`; `QueryArticlesDto` now extends it.
+- `Technics` + `TechnicsPhoto` Prisma models + migration (equipment catalog with category enum
+  `VEHICLE`/`PUMP`/`PERSONAL_GEAR`/`RESCUE_TOOL`/`COMMUNICATION`/`OTHER`, status `ACTIVE`/`RETIRED`,
+  JSON `specs`, and a generic photo attachment table separate from the gallery's `Photo` model).
+- `GET /api/technics` (public, paginated, filterable by `?category=`/`?status=`),
+  `GET /api/technics/:id` (public, includes presigned photo URLs).
+- `POST /api/technics` (EDITOR+), `PATCH /api/technics/:id` (EDITOR+), `DELETE /api/technics/:id`
+  (ADMIN, cascades to attached photos/media/MinIO objects before deleting).
+- `POST /api/technics/:id/photos/upload` (EDITOR+, multipart upload+attach in one call),
+  `PATCH /api/technics/:id/photos/reorder` (EDITOR+), `DELETE /api/technics/photos/:photoId` (EDITOR+).
+- `MediaService.upload()` generalized to take a storage-path `prefix` instead of gallery-specific
+  `{year, eventId}`, so both the gallery and technics uploads share the same Sharp/MinIO pipeline.
