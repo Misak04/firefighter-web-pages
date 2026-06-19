@@ -55,6 +55,15 @@ services:
     ports:
       - "4000:4000"
 
+  clamav:
+    image: clamav/clamav:stable
+    restart: unless-stopped
+    profiles: ["clamav"]
+    volumes:
+      - clamav_data:/var/lib/clamav
+    ports:
+      - "3310:3310"
+
   nginx:
     image: nginx:alpine
     restart: unless-stopped
