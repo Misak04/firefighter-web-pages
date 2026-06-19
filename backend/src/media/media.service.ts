@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as sharp from 'sharp';
 import { randomUUID } from 'crypto';
+import { fromBuffer } from 'file-type';
 import { MinioService } from './minio.service';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -27,15 +28,30 @@ export class MediaService {
       throw new BadRequestException('File exceeds the 20 MB upload limit.');
     }
 
+    // Client-supplied Content-Type/mimetype is trivially spoofable (e.g. renaming a
+    // malicious file with a .jpg extension); sniff the real type from the file's magic
+    // bytes and reject if it doesn't actually match an allowed image format.
+    const sniffed = await fromBuffer(file.buffer);
+    if (!sniffed || !ALLOWED_MIME_TYPES.includes(sniffed.mime)) {
+      throw new BadRequestException('File content does not match an allowed image type.');
+    }
+
     const id = randomUUID();
     const prefix = ctx.prefix;
 
-    // .rotate() auto-orients from EXIF before re-encoding; sharp strips all metadata
-    // (including EXIF) on output unless .withMetadata() is explicitly called, so the
-    // visual orientation is preserved even though the EXIF block itself is removed.
-    const original = await sharp(file.buffer).rotate().toBuffer();
-    const small = await sharp(file.buffer).rotate().resize({ width: 300 }).webp().toBuffer();
-    const medium = await sharp(file.buffer).rotate().resize({ width: 800 }).webp().toBuffer();
+    let original: Buffer;
+    let small: Buffer;
+    let medium: Buffer;
+    try {
+      // .rotate() auto-orients from EXIF before re-encoding; sharp strips all metadata
+      // (including EXIF) on output unless .withMetadata() is explicitly called, so the
+      // visual orientation is preserved even though the EXIF block itself is removed.
+      original = await sharp(file.buffer).rotate().toBuffer();
+      small = await sharp(file.buffer).rotate().resize({ width: 300 }).webp().toBuffer();
+      medium = await sharp(file.buffer).rotate().resize({ width: 800 }).webp().toBuffer();
+    } catch {
+      throw new BadRequestException('Could not process image file.');
+    }
 
     const originalKey = `${prefix}/original/${id}`;
     const thumbSmallKey = `${prefix}/small/${id}.webp`;
