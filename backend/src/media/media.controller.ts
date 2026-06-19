@@ -18,18 +18,13 @@ export class MediaController {
   @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', { limits: { fileSize: MAX_FILE_SIZE_BYTES } }))
-  async upload(
-    @UploadedFile() file: Express.Multer.File,
-    @Body('eventId') eventId: string,
-    @Body('year', ParseIntPipe) year: number,
-    @Req() req: Request,
-  ) {
+  async upload(@UploadedFile() file: Express.Multer.File, @Body() dto: UploadMediaDto, @Req() req: Request) {
     if (!file) {
       throw new BadRequestException('No file provided');
     }
     const user = req.user as AccessTokenPayload;
     const media = await this.mediaService.upload(file, {
-      prefix: `gallery/${year}/${eventId}`,
+      prefix: `gallery/${dto.year}/${dto.eventId}`,
       uploadedById: user.sub,
     });
     return this.mediaService.withPresignedUrls(media);
