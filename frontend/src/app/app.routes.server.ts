@@ -6,6 +6,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'gallery', renderMode: RenderMode.Server },
   { path: 'gallery/:year', renderMode: RenderMode.Server },
   { path: 'gallery/:year/:event', renderMode: RenderMode.Server },
+  { path: 'technics', renderMode: RenderMode.Server },
   { path: 'admin/**', renderMode: RenderMode.Client },
   { path: '**', renderMode: RenderMode.Prerender },
 ];
