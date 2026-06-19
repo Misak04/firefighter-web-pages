@@ -19,6 +19,7 @@ export class MediaService {
   constructor(
     private readonly minio: MinioService,
     private readonly prisma: PrismaService,
+    private readonly clamav: ClamAvService,
   ) {}
 
   async upload(file: { mimetype: string; size: number; buffer: Buffer; originalname: string }, ctx: UploadContext) {
