@@ -30,3 +30,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   backend `GalleryService`.
 - Admin `/admin/gallery` (event list + create form) and `/admin/gallery/:eventId` (multi-file
   upload, photo grid with delete and up/down reorder), client-rendered like the rest of `/admin`.
+- Public `/technics` — category tabs (PrimeNG `p-tabs`), equipment cards, detail dialog with a
+  `p-galleria` photo gallery, SSR per-request and wired to the backend `TechnicsService`.
+- Admin `/admin/technics` list (status `p-tag`, delete) and `/admin/technics/:id` editor
+  (name/category/manufacturer/year/description form, single-file photo upload, photo delete);
+  `:id` of `new` creates a new item.
